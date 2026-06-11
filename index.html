@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect Four</title>
+  
+  <!-- Modern sans-serif font for the comic aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Main Menu View -->
+    <main id="main-menu" class="main-menu active">
+      <div class="menu-card">
+        <div class="logo" aria-label="Connect Four Logo">
+          <div class="logo-circle pink"></div>
+          <div class="logo-circle yellow"></div>
+          <div class="logo-circle yellow"></div>
+          <div class="logo-circle pink"></div>
+        </div>
+        
+        <div class="menu-options">
+          <button class="btn btn-cpu" aria-label="Play versus CPU">
+            <span>PLAY VS CPU</span>
+            <span class="btn-icons" aria-hidden="true">
+              <svg class="icon-face" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="23" cy="23" r="19" fill="#FD6687" stroke="black" stroke-width="3"/>
+                <circle cx="15" cy="18" r="4" fill="black"/>
+                <circle cx="14" cy="17" r="1.5" fill="white"/>
+                <circle cx="31" cy="18" r="4" fill="black"/>
+                <circle cx="30" cy="17" r="1.5" fill="white"/>
+                <path d="M 14 27 Q 23 36 32 27" stroke="black" stroke-width="3" stroke-linecap="round" fill="none"/>
+              </svg>
+              <svg class="icon-face" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="23" cy="23" r="19" fill="#FFCE67" stroke="black" stroke-width="3"/>
+                <circle cx="15" cy="18" r="4" fill="black"/>
+                <circle cx="14" cy="17" r="1.5" fill="white"/>
+                <circle cx="31" cy="18" r="4" fill="black"/>
+                <circle cx="30" cy="17" r="1.5" fill="white"/>
+                <path d="M 14 29 L 32 29" stroke="black" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          
+          <button class="btn btn-player" aria-label="Play versus Player">
+            <span>PLAY VS PLAYER</span>
+            <span class="btn-icons" aria-hidden="true">
+              <svg class="icon-face" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="23" cy="23" r="19" fill="#FD6687" stroke="black" stroke-width="3"/>
+                <circle cx="15" cy="18" r="4" fill="black"/>
+                <circle cx="14" cy="17" r="1.5" fill="white"/>
+                <circle cx="31" cy="18" r="4" fill="black"/>
+                <circle cx="30" cy="17" r="1.5" fill="white"/>
+                <path d="M 14 27 Q 23 36 32 27" stroke="black" stroke-width="3" stroke-linecap="round" fill="none"/>
+              </svg>
+              <svg class="icon-face" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="23" cy="23" r="19" fill="#FFCE67" stroke="black" stroke-width="3"/>
+                <circle cx="15" cy="18" r="4" fill="black"/>
+                <circle cx="14" cy="17" r="1.5" fill="white"/>
+                <circle cx="31" cy="18" r="4" fill="black"/>
+                <circle cx="30" cy="17" r="1.5" fill="white"/>
+                <path d="M 14 27 Q 23 36 32 27" stroke="black" stroke-width="3" stroke-linecap="round" fill="none"/>
+              </svg>
+            </span>
+          </button>
+          
+          <button class="btn btn-rules" aria-label="Game Rules">
+            <span>GAME RULES</span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Game Rules View -->
+    <main id="rules-view" class="rules-view">
+      <div class="rules-card">
+        <h1 class="rules-title">RULES</h1>
+        
+        <section class="rules-section">
+          <h2 class="rules-heading">Objective</h2>
+          <p class="rules-text">Be the first player to connect 4 of the same colored discs in a row (either vertically, horizontally, or diagonally).</p>
+        </section>
+        
+        <section class="rules-section">
+          <h2 class="rules-heading">How to play</h2>
+          <ol class="rules-list">
+            <li>Red goes first in the first game.</li>
+            <li>Players must alternate turns, and only one disc can be dropped in each turn.</li>
+            <li>The game ends when there is a 4-in-a-row or a stalemate.</li>
+            <li>The starter of the previous game goes second on the next game.</li>
+          </ol>
+        </section>
+        
+        <button class="btn-check" aria-label="Acknowledge rules and return to main menu">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 12L9 17L20 6" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </main>
+
+    <!-- Game View -->
+    <main id="game-view" class="game-view">
+      <div class="game-header">
+        <button class="btn-small btn-menu">MENU</button>
+        <div class="logo logo-small" aria-label="Connect Four Logo">
+          <div class="logo-circle pink"></div>
+          <div class="logo-circle yellow"></div>
+          <div class="logo-circle yellow"></div>
+          <div class="logo-circle pink"></div>
+        </div>
+        <button class="btn-small btn-restart">RESTART</button>
+      </div>
+      
+      <div class="game-content">
+        <!-- Player 1 Score -->
+        <div class="score-card player-1">
+          <div class="score-icon">
+            <svg class="icon-face" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="23" cy="23" r="19" fill="#FD6687" stroke="black" stroke-width="3"/>
+              <circle cx="15" cy="18" r="4" fill="black"/>
+              <circle cx="14" cy="17" r="1.5" fill="white"/>
+              <circle cx="31" cy="18" r="4" fill="black"/>
+              <circle cx="30" cy="17" r="1.5" fill="white"/>
+              <path d="M 14 27 Q 23 36 32 27" stroke="black" stroke-width="3" stroke-linecap="round" fill="none"/>
+            </svg>
+          </div>
+          <p class="score-label">Player 1</p>
+          <p class="score-value">0</p>
+        </div>
+        
+        <!-- Board -->
+        <div class="board-wrapper">
+          <div class="board-container">
+            <div id="top-pointer-container">
+              <svg id="pointer-arrow" width="38" height="36" viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 3 2 L 35 2 L 35 20 L 19 34 L 3 20 Z" fill="#FD6687" stroke="#000000" stroke-width="3" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="pieces-layer"></div>
+            <div class="board-grid">
+              <div class="cell-front" data-row="0" data-col="0"></div><div class="cell-front" data-row="0" data-col="1"></div><div class="cell-front" data-row="0" data-col="2"></div><div class="cell-front" data-row="0" data-col="3"></div><div class="cell-front" data-row="0" data-col="4"></div><div class="cell-front" data-row="0" data-col="5"></div><div class="cell-front" data-row="0" data-col="6"></div>
+              <div class="cell-front" data-row="1" data-col="0"></div><div class="cell-front" data-row="1" data-col="1"></div><div class="cell-front" data-row="1" data-col="2"></div><div class="cell-front" data-row="1" data-col="3"></div><div class="cell-front" data-row="1" data-col="4"></div><div class="cell-front" data-row="1" data-col="5"></div><div class="cell-front" data-row="1" data-col="6"></div>
+              <div class="cell-front" data-row="2" data-col="0"></div><div class="cell-front" data-row="2" data-col="1"></div><div class="cell-front" data-row="2" data-col="2"></div><div class="cell-front" data-row="2" data-col="3"></div><div class="cell-front" data-row="2" data-col="4"></div><div class="cell-front" data-row="2" data-col="5"></div><div class="cell-front" data-row="2" data-col="6"></div>
+              <div class="cell-front" data-row="3" data-col="0"></div><div class="cell-front" data-row="3" data-col="1"></div><div class="cell-front" data-row="3" data-col="2"></div><div class="cell-front" data-row="3" data-col="3"></div><div class="cell-front" data-row="3" data-col="4"></div><div class="cell-front" data-row="3" data-col="5"></div><div class="cell-front" data-row="3" data-col="6"></div>
+              <div class="cell-front" data-row="4" data-col="0"></div><div class="cell-front" data-row="4" data-col="1"></div><div class="cell-front" data-row="4" data-col="2"></div><div class="cell-front" data-row="4" data-col="3"></div><div class="cell-front" data-row="4" data-col="4"></div><div class="cell-front" data-row="4" data-col="5"></div><div class="cell-front" data-row="4" data-col="6"></div>
+              <div class="cell-front" data-row="5" data-col="0"></div><div class="cell-front" data-row="5" data-col="1"></div><div class="cell-front" data-row="5" data-col="2"></div><div class="cell-front" data-row="5" data-col="3"></div><div class="cell-front" data-row="5" data-col="4"></div><div class="cell-front" data-row="5" data-col="5"></div><div class="cell-front" data-row="5" data-col="6"></div>
+            </div>
+            
+            <div class="click-layer">
+              <div class="hit-col" data-col="0"></div>
+              <div class="hit-col" data-col="1"></div>
+              <div class="hit-col" data-col="2"></div>
+              <div class="hit-col" data-col="3"></div>
+              <div class="hit-col" data-col="4"></div>
+              <div class="hit-col" data-col="5"></div>
+              <div class="hit-col" data-col="6"></div>
+            </div>
+          </div>
+          
+          <div class="turn-indicator pink">
+            <p class="turn-label">PLAYER 1'S TURN</p>
+            <p class="turn-timer">30s</p>
+          </div>
+          
+          <!-- Victory Card -->
+          <div class="victory-card">
+            <p class="victory-winner">PLAYER 1</p>
+            <p class="victory-text">WINS</p>
+            <button class="btn-play-again">PLAY AGAIN</button>
+          </div>
+        </div>
+        
+        <!-- Player 2 Score -->
+        <div class="score-card player-2">
+          <div class="score-icon">
+            <svg class="icon-face" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="23" cy="23" r="19" fill="#FFCE67" stroke="black" stroke-width="3"/>
+              <circle cx="15" cy="18" r="4" fill="black"/>
+              <circle cx="14" cy="17" r="1.5" fill="white"/>
+              <circle cx="31" cy="18" r="4" fill="black"/>
+              <circle cx="30" cy="17" r="1.5" fill="white"/>
+              <path d="M 14 27 Q 23 36 32 27" stroke="black" stroke-width="3" stroke-linecap="round" fill="none"/>
+            </svg>
+          </div>
+          <p class="score-label">Player 2</p>
+          <p class="score-value">0</p>
+        </div>
+      </div>
+    </main>
+    
+  </div>
+  
+  <script src="app.js"></script>
+</body>
+</html>
